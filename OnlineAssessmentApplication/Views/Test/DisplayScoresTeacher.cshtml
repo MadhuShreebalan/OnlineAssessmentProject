@@ -1,0 +1,62 @@
+﻿@model IEnumerable<OnlineAssessmentApplication.ViewModel.ResultViewModel>
+
+@{
+    ViewBag.Title = "DisplayScoresTeacher";
+}
+<h2>View Students Result</h2>
+@*<p>
+        @Html.ActionLink("DisplayScoresTeacher", "Test", new { @class = "btn btn-primary" })
+    </p>*@
+
+@using (Html.BeginForm("DisplayScoresTeacher", "Test", FormMethod.Get))
+{
+    @Html.Partial("GradeScoresView", new OnlineAssessmentApplication.ViewModel.ResultViewModel())
+    <button type="submit">Filter</button>
+
+}
+
+<div>
+
+</div>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.TestId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.UserId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.StudentName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Score)
+        </th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <th>
+                @Html.DisplayFor(modelItem => item.TestId)
+            </th>
+            <th>
+                @Html.DisplayFor(modelItem => item.UserId)
+            </th>
+            <th>
+                @Html.DisplayFor(modelItem => item.StudentName)
+            </th>
+            <th>
+                @Html.DisplayFor(modelItem => item.Score)
+            </th>
+
+        </tr>
+
+    }
+
+</table>
+
+<p>
+
+    @Html.ActionLink("Back to List", "Index")
+</p>
+

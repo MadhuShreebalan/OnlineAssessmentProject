@@ -1,0 +1,27 @@
+﻿
+@model IEnumerable<OnlineAssessmentApplication.ViewModel.ResultViewModel>
+@{
+    ViewBag.Title = "StudentScore";
+}
+<h2>ViewStudentsResult</h2>
+<p>
+    @Html.ActionLink("StudentScore", "Test", new { @class = "btn btn-primary" })
+</p>
+
+<table>
+    @foreach (var item in Model)
+    {
+        <tr>Test ID:@item.TestId</tr>
+        <br />
+        <tr>Your score:@item.Score</tr>
+    }
+</table>
+
+
+<p>
+
+    @Html.ActionLink("Back to List", "Index")
+</p>
+
+
+
