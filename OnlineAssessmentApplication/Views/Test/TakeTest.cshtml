@@ -55,7 +55,11 @@
 
     startTick();
 
-
+    //window.onbeforeunload = closingCode;
+    //function closingCode() {
+    //    document.getElementById("save").submit();
+    //    return null;
+    //}
 </script>
 @{
     IEnumerable<QuestionViewModel> qns = ViewData["Questions"] as IEnumerable<QuestionViewModel>;

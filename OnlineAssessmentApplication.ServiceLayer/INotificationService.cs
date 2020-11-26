@@ -10,17 +10,27 @@ namespace OnlineAssessmentApplication.ServiceLayer
     /// </summary>
     public interface ISmtpClient
     {
-        void Send();
+        bool Send(MailMessage mailMessage);
     }
     [TestClass]
     public class INotificationService : ISmtpClient
     {
-        [TestMethod]
-        public void Send()
+        private ISmtpClient @object;
+
+        
+        public INotificationService(ISmtpClient @object)
         {
-            MailMessage mailMessage = new MailMessage("madhushreebalan@gmail.com", "madhushreen2020@srishakthi.ac.in");
-            mailMessage.Subject = "Regarding Test Approval";
-            mailMessage.Body = " Test is Scheduled. Kindly, provide your status";
+            this.@object = @object;
+        }
+
+        [TestMethod]
+        public bool Send( MailMessage mailMessage)
+        {
+            mailMessage = new MailMessage("madhushreebalan@gmail.com", "madhushreen2020@srishakthi.ac.in")
+            {
+                Subject = "Regarding Test Approval",
+                Body = " Test is Scheduled. Kindly, provide your status"
+            };
             SmtpClient smtpClient = new SmtpClient();
             try
             {
@@ -34,6 +44,7 @@ namespace OnlineAssessmentApplication.ServiceLayer
                     Console.WriteLine(smptNameNotFound.InnerException.Message);
                 }
             }
-        }
+            return true;
+    }
     }
 }

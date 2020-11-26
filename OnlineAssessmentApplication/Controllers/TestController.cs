@@ -4,6 +4,7 @@ using OnlineAssessmentApplication.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Web.Mvc;
+using System.Net.Mail;
 
 namespace OnlineAssessmentApplication.Controllers
 {
@@ -12,10 +13,10 @@ namespace OnlineAssessmentApplication.Controllers
     //[LogCustomExceptionFilter]
     public class TestController : Controller
     {
-        readonly ITestService testService;
-        readonly QuestionService questionService;
-        readonly AnswerService answerService;
-        readonly INotificationService notificationService;
+        private readonly ITestService testService;
+        private readonly QuestionService questionService;
+        private readonly AnswerService answerService;
+        private readonly INotificationService notificationService;
         public TestController(ITestService testService, QuestionService questionService, AnswerService answerService, INotificationService notificationService)
         {
             this.testService = testService;
@@ -76,9 +77,9 @@ namespace OnlineAssessmentApplication.Controllers
         }
 
         [HttpGet]
-        public ActionResult GetApproval()
+        public ActionResult GetApproval(MailMessage mailMessage)
         {
-            notificationService.Send();
+            notificationService.Send(mailMessage);
             return RedirectToAction("UpcomingTest");
         }
         [HttpGet]
@@ -120,6 +121,10 @@ namespace OnlineAssessmentApplication.Controllers
         {
             int testId = 3;
             int questionId = 5;
+            //for (int i=0;i<Model.;i++)
+            //{
+
+            //}
             ViewData["questions"] = questionService.DisplayAllDetails(testId);
             ViewData["answers"] = answerService.DisplayAnswers(questionId);
             //  IEnumerable< QuestionsViewModel> qns = questionServices.DisplayAllDetails(testId);
